@@ -22,7 +22,7 @@ router.get('/', function(req, res){
     } else {
       // We connected to the database!!!
       // Now we're going to GET things from the db
-      var queryText = 'SELECT * FROM "koalaholla";';
+      var queryText = 'SELECT * FROM "koalaholla" ORDER BY "name" DESC;';
       // errorMakingQuery is a bool, result is an object
       db.query(queryText, function(errorMakingQuery, result){
         done();
@@ -60,6 +60,37 @@ router.post('/', function(req, res) {
         done();
         if(errorMakingQuery) {
           console.log(errorMakingQuery);
+          console.log('Attempted to query with', queryText);
+          console.log('Error making query');
+          res.sendStatus(500);
+        } else {
+          // console.log(result);
+          // Send back the results
+          res.sendStatus(200);
+        }
+      }); // end query
+    } // end if
+  }); // end pool
+});
+
+router.put('/', function(req, res){
+  var koala = req.body; // Koala with updated content
+  console.log('Put route called with koala of ', koala);
+
+  // YOUR CODE HERE
+  pool.connect(function(errorConnectingToDatabase, db, done){
+    if(errorConnectingToDatabase) {
+      console.log('Error connecting to the database.');
+      res.sendStatus(500);
+    } else {
+      console.log(koala);
+      // We connected to the database!!!
+      // Now we're going to GET things from the db
+      var queryText = 'UPDATE "koalaholla" SET "ready_for_transfer" = $1 WHERE id = $2;';
+      // errorMakingQuery is a bool, result is an object
+      db.query(queryText, [koala.readyForTransfer, koala.id], function(errorMakingQuery, result){
+        done();
+        if(errorMakingQuery) {
           console.log('Attempted to query with', queryText);
           console.log('Error making query');
           res.sendStatus(500);

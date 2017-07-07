@@ -23,7 +23,32 @@ $( document ).ready( function(){
     // call saveKoala with the new obejct
     saveKoala( objectToSend );
   }); //end addButton on click
+
+  $('#viewKoalas').on('click', '.transferBtn', function () {
+   console.log('transfer button clicked');
+   var updateKoala = {};
+   updateKoala.id = $(this).data('koalaid');
+   updateKoala.readyForTransfer = $(this).data('transfer');
+   if (updateKoala.readyForTransfer == "y"){
+     updateKoala.readyForTransfer = "n";
+   } else if (updateKoala.readyForTransfer == "n") {
+     updateKoala.readyForTransfer = "y";
+   }
+   console.log(updateKoala);
+
+   $.ajax({
+     url: '/koalas',
+     type: 'PUT',
+     data: updateKoala,
+     success: function(response) {
+       getKoalas();
+     }
+   });
+  });
+
 }); // end doc ready
+
+
 
 function getKoalas(){
   console.log( 'in getKoalas' );
@@ -31,9 +56,9 @@ function getKoalas(){
   $.ajax({
     url: '/koalas',
     type: 'GET',
-    success: function( data ){
-      console.log( 'got some koalas: ', data );
-      appendToDOM(data.koalas);
+    success: function( receivedData ){
+      console.log( 'got some koalas: ', receivedData );
+      appendToDOM(receivedData.koalas);
     } // end success
   }); //end ajax
   // display on DOM with buttons that allow edit of each
@@ -46,13 +71,14 @@ function saveKoala( newKoala ){
     url: '/koalas',
     type: 'POST',
     data: newKoala,
-    success: function( data ){
-      console.log( 'got some koalas: ', data );
+    success: function( responseData ){
+      console.log( 'got some koalas: ', responseData );
      // end success
     getKoalas();
   }
   }); //end ajax
 }
+
 
 function appendToDOM(koalaHolla) {
   $('#viewKoalas').empty();
@@ -65,7 +91,7 @@ function appendToDOM(koalaHolla) {
     $tr.append('<td>' + koala.name + '</td>');
     $tr.append('<td>' + koala.gender + '</td>');
     $tr.append('<td>' + koala.age + '</td>');
-    $tr.append('<td>' + koala.read_for_transfer + '</td>');
+    $tr.append('<td><button class="transferBtn ' + koala.ready_for_transfer + '" data-koalaid="' + koala.id + '" data-transfer="' + koala.ready_for_transfer + '">Ready for Transfer</button></td>');
     $tr.append('<td>' + koala.notes + '</td>');
   //  $tr.append('<td><button class="editBtn">Edit</button></td>');
     $tr.append('<td><button class="deleteBtn" data-koalaid="' + koala.id + '">Delete</button></td>');
