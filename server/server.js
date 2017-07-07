@@ -3,8 +3,11 @@ var app = express();
 var bodyParser = require('body-parser');
 var path = require( 'path' );
 var port = process.env.PORT || 5000;
+var koalaRoute = require ('./routes/koala.js');
 
 app.use(bodyParser.urlencoded({extended: true}));
+
+app.use('/koalas', koalaRoute);
 
 // Serve back static files by default
 app.get('/*', function(req, res) {

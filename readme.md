@@ -43,3 +43,17 @@ Sample Output
 Your final product may look something like this:
 
 ![sample](sample.png)
+
+
+### KoalaHolla
+
+- [x] Put koalaHolla database into postico antares folder
+- [ ] specify the database in the server side code
+- [ ] Go through client and server files and determine what already exists/ comment what everything is doing
+- [ ] Based on what code exists/doesn't exist, create client side request to get data from the server
+- [ ] Create a request response on the server side
+- [ ] append results to the DOM
+- [ ] add event listeners to the buttons on the DOM
+- [ ] create an ajax post request on client side
+- [ ] create a request response on the server side
+- [ ] append results to the DOM
