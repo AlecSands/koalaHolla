@@ -48,12 +48,14 @@ Your final product may look something like this:
 ### KoalaHolla
 
 - [x] Put koalaHolla database into postico antares folder
-- [ ] specify the database in the server side code
-- [ ] Go through client and server files and determine what already exists/ comment what everything is doing
-- [ ] Based on what code exists/doesn't exist, create client side request to get data from the server
-- [ ] Create a request response on the server side
-- [ ] append results to the DOM
-- [ ] add event listeners to the buttons on the DOM
-- [ ] create an ajax post request on client side
-- [ ] create a request response on the server side
-- [ ] append results to the DOM
+- [x] specify the database in the server side code
+- [x] Go through client and server files and determine what already exists/ comment what everything is doing
+- [x] Based on what code exists/doesn't exist, create client side request to get data from the server
+- [x] Complete the objectToSend object
+- [x] create an appendToDOM function
+- [x] Create a request response on the server side
+- [x] append results to the DOM
+- [x] add event listeners to the buttons on the DOM
+- [x] create an ajax post request on client side
+- [x] create a request response on the server side
+- [x] append results to the DOM
